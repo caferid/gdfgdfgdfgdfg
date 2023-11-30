@@ -1,18 +1,25 @@
-import React from 'react'
-import Feature_item from './Feature_item'
+import React from "react";
+import Feature_item from "./Feature_item";
+import useFetch from "../../hooks/useFetch";
 
 function Feature__items() {
+  const baseUrl = 'http://localhost:3000/features'
+  const {data} = useFetch(baseUrl)
   return (
     <>
-    <div className="container">
-        <div className="row ">
-                <Feature_item/>
-                <Feature_item/>
-                <Feature_item/>
+      <section id="feature-items" style={{backgroundColor:"black"}}>
+        <div className="container">
+          <div className="row ">
+            {data && data.map(item => (
+
+            <Feature_item key={item.id} {...item}/>
+            ))}
+
+          </div>
         </div>
-    </div>
+      </section>
     </>
-  )
+  );
 }
 
-export default Feature__items
+export default Feature__items;
